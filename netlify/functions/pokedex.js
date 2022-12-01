@@ -10,7 +10,11 @@ exports.handler = async function (event, context) {
   const eventBody = JSON.parse(event.body);
   const date = DateTime.now();
 
-  console.log(chalk.redBright(`${date}: Initiating PokeDex`));
+  if (eventBody.region === 'kanto') {
+    console.log(chalk.redBright(`${date}: Initiating Kanto PokeDex!`));
+  } else {
+    console.log(chalk.blueBright(`${date}: Initiating Hoenn PokeDex!`));
+  }
 
   const POKE_API = `https://pokeapi.co/api/v2/pokedex/${eventBody.region}`;
 
