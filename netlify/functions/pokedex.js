@@ -1,9 +1,17 @@
 // mod.cjs
+// eslint-disable no-unused-vars
 // eslint-disable-next-line no-shadow
 const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
+const chalk = require('chalk');
+const { DateTime } = require('luxon');
+
 exports.handler = async function (event, context) {
   const eventBody = JSON.parse(event.body);
+  const date = DateTime.now();
+
+  console.log(chalk.redBright(`${date}: Initiating PokeDex`));
+
   const POKE_API = `https://pokeapi.co/api/v2/pokedex/${eventBody.region}`;
 
   const response = await fetch(POKE_API);
